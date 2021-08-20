@@ -1,0 +1,10 @@
+@import "../../../../../scss/app-variables";
+
+:host {
+  min-height: $header-height;
+  position: fixed;
+  background-color: lightgrey;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+}

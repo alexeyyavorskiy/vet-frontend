@@ -1,0 +1,6 @@
+@import "../../../../../scss/app-variables";
+
+:host {
+  background-color: lightgrey;
+  min-height: $footer-height;
+}

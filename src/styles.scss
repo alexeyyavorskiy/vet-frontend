@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/scss/bootstrap-utilities";
+@import "~bootstrap/scss/reboot";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "scss/app-variables";
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
