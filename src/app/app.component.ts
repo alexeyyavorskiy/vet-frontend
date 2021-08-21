@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {pages} from "./modules/shared/models/constants/constants";
+import {TokenService} from "./modules/auth/services/token.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'vet-frontend';
+  public pages = pages;
+
+  constructor(public tokenService: TokenService) {
+  }
+
 }

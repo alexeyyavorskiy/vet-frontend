@@ -5,6 +5,8 @@ import {ICredentials} from "../../../shared/models/interfaces/credentials";
 import {AuthService} from "../../services/auth.service";
 import {TokenService} from "../../services/token.service";
 import {Router} from "@angular/router";
+import {MessageService} from "../../../shared/services/message.service";
+import {MessageTypes} from "../../../shared/models/enums/message-types";
 
 @Component({
   selector: 'app-sign-in-form',
@@ -20,6 +22,7 @@ export class SignInFormComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private tokenService: TokenService,
+              private messageService: MessageService,
               private router: Router) {
     // this.matcher = new CustomErrorStateMatcher();
   }
@@ -31,10 +34,17 @@ export class SignInFormComponent implements OnInit {
     })
   }
 
-  onSubmit(credentials: ICredentials) {
-    this.authService.signIn(credentials).subscribe((res: any) => {
+  signIn(credentials: ICredentials) {
+    this.authService.signIn(credentials).subscribe(() => {
       this.router.navigate(['/dashboard']);
+    }, (err: any) => {
+      console.log(err.error.message)
+      this.messageService.showMessage(err.error.message, null, MessageTypes.ERROR);
     });
+  }
+
+  goToSignUp() {
+    this.router.navigate(['/sign-up'])
   }
 
 }

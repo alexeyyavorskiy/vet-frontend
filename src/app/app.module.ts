@@ -9,6 +9,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./modules/shared/auth.interceptor";
 import {SharedModule} from "./modules/shared/shared.module";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import {SharedModule} from "./modules/shared/shared.module";
     AuthModule,
     HttpClientModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    MatSnackBarModule,
+    MatButtonToggleModule
   ],
   providers: [
     {

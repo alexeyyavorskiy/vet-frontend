@@ -2,6 +2,11 @@
   <app-header class="w-100"></app-header>
   <div class="container-fluid main">
     <div class="row">
+      <div *ngIf="tokenService.getToken()" class="d-flex justify-content-center mt-3">
+        <mat-button-toggle-group>
+          <mat-button-toggle routerLinkActive="active" *ngFor="let page of pages" [value]="page" [routerLink]="[page.value]">{{page.label}}</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
       <router-outlet></router-outlet>
     </div>
   </div>

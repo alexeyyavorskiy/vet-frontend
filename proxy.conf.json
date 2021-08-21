@@ -1,0 +1,12 @@
+{
+  "/api": {
+    "target": "http://localhost",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/image": {
+    "target": "http://localhost",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
