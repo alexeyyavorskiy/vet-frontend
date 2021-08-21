@@ -7,6 +7,7 @@ import {TokenService} from "../../services/token.service";
 import {Router} from "@angular/router";
 import {MessageService} from "../../../shared/services/message.service";
 import {MessageTypes} from "../../../shared/models/enums/message-types";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-sign-in-form',
@@ -37,8 +38,7 @@ export class SignInFormComponent implements OnInit {
   signIn(credentials: ICredentials) {
     this.authService.signIn(credentials).subscribe(() => {
       this.router.navigate(['/dashboard']);
-    }, (err: any) => {
-      console.log(err.error.message)
+    }, (err: HttpErrorResponse) => {
       this.messageService.showMessage(err.error.message, null, MessageTypes.ERROR);
     });
   }

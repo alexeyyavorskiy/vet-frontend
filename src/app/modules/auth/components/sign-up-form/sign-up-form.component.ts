@@ -5,6 +5,9 @@ import {TokenService} from "../../services/token.service";
 import {Router} from "@angular/router";
 import {MIN_LENGTH_VALIDATION} from "../../../shared/models/constants/constants";
 import {ICredentials} from "../../../shared/models/interfaces/credentials";
+import {HttpErrorResponse} from "@angular/common/http";
+import {MessageTypes} from "../../../shared/models/enums/message-types";
+import {MessageService} from "../../../shared/services/message.service";
 
 @Component({
   selector: 'app-sign-up-form',
@@ -19,6 +22,7 @@ export class SignUpFormComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private tokenService: TokenService,
+              private messageService: MessageService,
               private router: Router) {
   }
 
@@ -36,6 +40,8 @@ export class SignUpFormComponent implements OnInit {
   signUp(credentials: ICredentials) {
     this.authService.signUp(credentials).subscribe(() => {
       this.router.navigate(['/dashboard']);
+    }, (err: HttpErrorResponse) => {
+      this.messageService.showMessage(err.error.message, null, MessageTypes.ERROR);
     });
   }
 }
