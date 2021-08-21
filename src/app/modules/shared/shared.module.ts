@@ -7,21 +7,31 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatTableModule} from "@angular/material/table";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {FormsModule} from "@angular/forms";
+import {MatIconModule} from "@angular/material/icon";
+import { ConfirmationDialogComponent } from './components/modals/confirmation-dialog/confirmation-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatCardModule} from "@angular/material/card";
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
   declarations: [
     TableComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ConfirmationDialogComponent
   ],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatTableModule,
-    MatCheckboxModule,
-    FormsModule
-  ],
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatTableModule,
+        MatCheckboxModule,
+        FormsModule,
+        MatIconModule,
+        MatDialogModule,
+        MatCardModule,
+        RouterModule
+    ],
   exports: [
     TableComponent,
     HeaderComponent,

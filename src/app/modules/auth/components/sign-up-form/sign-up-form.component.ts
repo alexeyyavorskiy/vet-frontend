@@ -17,7 +17,7 @@ import {MessageService} from "../../../shared/services/message.service";
 export class SignUpFormComponent implements OnInit {
 
   public form: FormGroup;
-  public hide: boolean;
+  public hide = true;
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,

@@ -16,7 +16,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class SignInFormComponent implements OnInit {
   public form: FormGroup;
-  public hide: boolean;
+  public hide = true;
   // public formSubmitted: boolean;
   // public matcher: CustomErrorStateMatcher;
 

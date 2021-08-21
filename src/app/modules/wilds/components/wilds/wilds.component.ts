@@ -18,7 +18,7 @@ export class WildsComponent implements OnInit {
 
   ngOnInit(): void {
     this.wilds$ = this.dataService.getWilds();
-    this.displayedColumns = ['id', 'species', 'birthDay', 'trackingId', 'vaccinated'];
+    this.displayedColumns = ['id', 'species', 'birthDay', 'trackingId', 'vaccinated', 'actions'];
   }
 
 }

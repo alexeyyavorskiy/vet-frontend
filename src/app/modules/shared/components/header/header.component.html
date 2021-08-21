@@ -1,3 +1,6 @@
-<div class="d-flex justify-content-end w-100 mx-3">
+<div class="d-flex justify-content-between align-items-center w-100 mx-3">
+  <button mat-icon-button color="primary" [routerLink]="['/dashboard']">
+    <mat-icon>home</mat-icon>
+  </button>
   <button mat-raised-button color="primary" *ngIf="tokenService.getToken()" (click)="signOut()">Sign out</button>
 </div>

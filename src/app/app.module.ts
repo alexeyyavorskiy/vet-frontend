@@ -11,6 +11,7 @@ import {AuthInterceptor} from "./modules/shared/auth.interceptor";
 import {SharedModule} from "./modules/shared/shared.module";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {ConfirmationDialogComponent} from "./modules/shared/components/modals/confirmation-dialog/confirmation-dialog.component";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,9 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
     SharedModule,
     MatSnackBarModule,
     MatButtonToggleModule
+  ],
+  entryComponents: [
+    ConfirmationDialogComponent
   ],
   providers: [
     {
