@@ -7,13 +7,20 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
+import { OwnerDialogComponent } from './components/owner-dialog/owner-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
 @NgModule({
   declarations: [
     OwnersComponent,
-    OwnersTableComponent
+    OwnersTableComponent,
+    OwnerDialogComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +28,12 @@ import {MatButtonModule} from "@angular/material/button";
     MatCheckboxModule,
     MatIconModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatProgressBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
   ]
 })
 export class OwnersModule { }

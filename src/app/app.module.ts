@@ -12,6 +12,7 @@ import {SharedModule} from "./modules/shared/shared.module";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {ConfirmationDialogComponent} from "./modules/shared/components/modals/confirmation-dialog/confirmation-dialog.component";
+import {OwnerDialogComponent} from "./modules/owners/components/owner-dialog/owner-dialog.component";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {ConfirmationDialogComponent} from "./modules/shared/components/modals/co
     MatButtonToggleModule
   ],
   entryComponents: [
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    OwnerDialogComponent
   ],
   providers: [
     {

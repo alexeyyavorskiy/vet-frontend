@@ -1,7 +1,7 @@
 @import "../scss/app-variables";
 
 .main {
-  min-height: calc(100vh - #{$header-height});
+  //min-height: calc(100vh - #{$header-height});
   margin-top: 70px;
   flex: 1
 }

@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {MAIN_URL} from "../shared/models/constants/constants";
 import {IOwner} from "../shared/models/interfaces/owner";
@@ -14,6 +13,14 @@ export class OwnersService {
 
   getOwners() {
     return this.http.get<IOwner[]>(`${MAIN_URL}/owners/getAll`);
+  }
+
+  createOwner(owner: IOwner) {
+    return this.http.post<IOwner>(`${MAIN_URL}/owners/create`, owner);
+  }
+
+  updateOwner(owner: IOwner) {
+    return this.http.put<IOwner>(`${MAIN_URL}/owners/update/${owner.id}`, owner);
   }
 
   removeOwner(id: string) {

@@ -16,7 +16,7 @@ export class OwnersComponent implements OnInit {
 
   ngOnInit(): void {
     this.owners$ = this.ownersService.getOwners();
-    this.displayedColumns = ['fullName', 'address', 'actions'];
+    this.displayedColumns = ['fullName', 'country', 'city', 'street', 'actions'];
   }
 
 }

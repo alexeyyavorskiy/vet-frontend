@@ -1,0 +1,67 @@
+<h1 mat-dialog-title>{{data.owner ? 'Update' : 'Create new'}} owner</h1>
+<form [formGroup]="form">
+  <div class="container-fluid mb-4 p-0">
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Enter your full name</mat-label>
+          <input matInput formControlName="fullName">
+          <mat-error *ngIf="form.controls['fullName']?.errors?.required">
+            Full name is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div [formGroup]="addressForm">
+        <div class="col-6">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Enter your country</mat-label>
+            <input matInput formControlName="country">
+            <mat-error *ngIf="form.controls['country']?.errors?.required">
+              Country is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Enter your city</mat-label>
+            <input matInput formControlName="city">
+            <mat-error *ngIf="form.controls['city']?.errors?.required">
+              City is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Enter your street</mat-label>
+            <input matInput formControlName="street">
+            <mat-error *ngIf="form.controls['street']?.errors?.required">
+              Street is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Enter your Zip code</mat-label>
+            <input matInput formControlName="zipCode">
+            <mat-error *ngIf="form.controls['zipCode']?.errors?.required">
+              Zip code is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      </div>
+    </div>
+  <div mat-dialog-actions>
+    <button mat-button
+            type="button"
+            (click)="submit()"
+            [disabled]="!form.valid"
+            color="primary">
+      {{data.owner ? 'Update' : 'Create'}}
+    </button>
+    <button mat-button mat-dialog-close>Cancel</button>
+  </div>
+  <mat-dialog-actions *ngIf="isLoading">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </mat-dialog-actions>
+</form>
