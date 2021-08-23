@@ -26,21 +26,26 @@ export class AnimalTableComponent extends UnsubscribeOnDestroyAdapter implements
   ngOnInit(): void {
   }
 
-  edit(animal: IAnimal) {
-    const ref = this.matDialog.open(AnimalDialogComponent, {
-      width: '600px',
-      data: {animal}
-    });
+  edit(animal: IAnimal | any) {
+    if (animal.ownerId) {
+      this.subscriptions.sink = this.ownersService.getById(animal.ownerId).subscribe(owner => {
+        animal.owner = owner;
+        const ref = this.matDialog.open(AnimalDialogComponent, {
+          width: '600px',
+          data: {animal}
+        });
 
-    this.subscriptions.sink = ref.afterClosed().subscribe((updatedAnimal: IAnimal) => {
-      if (updatedAnimal) {
-        const foundAnimal = this.list.find(o => o.id === animal.id);
-        if (foundAnimal) {
-          this.list.splice(this.list.indexOf(foundAnimal), 1, updatedAnimal);
-          this.list = [...this.list];
-        }
-      }
-    });
+        this.subscriptions.sink = ref.afterClosed().subscribe((updatedAnimal: IAnimal) => {
+          if (updatedAnimal) {
+            const foundAnimal = this.list.find(o => o.id === animal.id);
+            if (foundAnimal) {
+              this.list.splice(this.list.indexOf(foundAnimal), 1, updatedAnimal);
+              this.list = [...this.list];
+            }
+          }
+        });
+      })
+    }
   }
 
   create() {
