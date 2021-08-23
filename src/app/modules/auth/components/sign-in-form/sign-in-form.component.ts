@@ -8,13 +8,14 @@ import {Router} from "@angular/router";
 import {MessageService} from "../../../shared/services/message.service";
 import {MessageTypes} from "../../../shared/models/enums/message-types";
 import {HttpErrorResponse} from "@angular/common/http";
+import {UnsubscribeOnDestroyAdapter} from "../../../shared/models/abstracts/unsubscribe-on-destroy-adapter.directive";
 
 @Component({
   selector: 'app-sign-in-form',
   templateUrl: './sign-in-form.component.html',
   styleUrls: ['./sign-in-form.component.scss']
 })
-export class SignInFormComponent implements OnInit {
+export class SignInFormComponent extends UnsubscribeOnDestroyAdapter implements OnInit {
   public form: FormGroup;
   public hide = true;
   // public formSubmitted: boolean;
@@ -26,6 +27,7 @@ export class SignInFormComponent implements OnInit {
               private messageService: MessageService,
               private router: Router) {
     // this.matcher = new CustomErrorStateMatcher();
+    super();
   }
 
   ngOnInit(): void {
@@ -36,7 +38,7 @@ export class SignInFormComponent implements OnInit {
   }
 
   signIn(credentials: ICredentials) {
-    this.authService.signIn(credentials).subscribe(() => {
+    this.subscriptions.sink = this.authService.signIn(credentials).subscribe(() => {
       this.router.navigate(['/dashboard']);
     }, (err: HttpErrorResponse) => {
       this.messageService.showMessage(err.error.message, null, MessageTypes.ERROR);

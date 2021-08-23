@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {TableComponent} from './components/table/table.component';
+import {AnimalTableComponent} from './components/table/animal-table.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {MatButtonModule} from "@angular/material/button";
@@ -22,7 +22,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
-    TableComponent,
+    AnimalTableComponent,
     HeaderComponent,
     FooterComponent,
     ConfirmationDialogComponent,
@@ -46,7 +46,7 @@ import {MatNativeDateModule} from "@angular/material/core";
     MatNativeDateModule
   ],
   exports: [
-    TableComponent,
+    AnimalTableComponent,
     HeaderComponent,
     FooterComponent,
     AnimalDialogComponent

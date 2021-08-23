@@ -15,6 +15,10 @@ export class OwnersService {
     return this.http.get<IOwner[]>(`${MAIN_URL}/owners/getAll`);
   }
 
+  getById(id: number) {
+    return this.http.get<IOwner>(`${MAIN_URL}/owners/getById/${id}`);
+  }
+
   createOwner(owner: IOwner) {
     return this.http.post<IOwner>(`${MAIN_URL}/owners/create`, owner);
   }

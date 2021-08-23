@@ -4,13 +4,14 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {IPet} from "../../../models/interfaces/pet";
 import {AnimalsService} from "../../../services/animals.service";
 import {IAnimal} from "../../../models/interfaces/animal";
+import {UnsubscribeOnDestroyAdapter} from "../../../models/abstracts/unsubscribe-on-destroy-adapter.directive";
 
 @Component({
   selector: 'app-animal-dialog',
   templateUrl: './animal-dialog.component.html',
   styleUrls: ['./animal-dialog.component.scss']
 })
-export class AnimalDialogComponent implements OnInit {
+export class AnimalDialogComponent extends UnsubscribeOnDestroyAdapter implements OnInit {
   public ownerForm: FormGroup;
   public addressForm: FormGroup;
   public isLoading: boolean;
@@ -22,10 +23,10 @@ export class AnimalDialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: {animal: IPet},
               private animalsService: AnimalsService
   ) {
+    super()
   }
 
   ngOnInit(): void {
-    console.log(this.data);
     this.addressForm = this.fb.group({
       country: [this.data?.animal?.owner?.address?.country, Validators.required],
       city: [this.data?.animal?.owner?.address?.city, Validators.required],
@@ -51,7 +52,7 @@ export class AnimalDialogComponent implements OnInit {
   public submit() {
     if (this.form.valid) {
       this.isLoading = true;
-      (this.data?.animal ? this.animalsService.updateAnimal({...this.data?.animal, ...this.form.value}) :
+      this.subscriptions.sink = (this.data?.animal ? this.animalsService.updateAnimal({...this.data?.animal, ...this.form.value}) :
         this.animalsService.createAnimal(this.form.value))
         .subscribe((animal: IAnimal) => {
           this.dialogRef.close(animal);

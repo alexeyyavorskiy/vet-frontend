@@ -8,13 +8,14 @@ import {ICredentials} from "../../../shared/models/interfaces/credentials";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MessageTypes} from "../../../shared/models/enums/message-types";
 import {MessageService} from "../../../shared/services/message.service";
+import {UnsubscribeOnDestroyAdapter} from "../../../shared/models/abstracts/unsubscribe-on-destroy-adapter.directive";
 
 @Component({
   selector: 'app-sign-up-form',
   templateUrl: './sign-up-form.component.html',
   styleUrls: ['./sign-up-form.component.scss']
 })
-export class SignUpFormComponent implements OnInit {
+export class SignUpFormComponent extends UnsubscribeOnDestroyAdapter implements OnInit {
 
   public form: FormGroup;
   public hide = true;
@@ -24,6 +25,7 @@ export class SignUpFormComponent implements OnInit {
               private tokenService: TokenService,
               private messageService: MessageService,
               private router: Router) {
+    super();
   }
 
   ngOnInit(): void {
@@ -38,7 +40,7 @@ export class SignUpFormComponent implements OnInit {
   }
 
   signUp(credentials: ICredentials) {
-    this.authService.signUp(credentials).subscribe(() => {
+    this.subscriptions.sink = this.authService.signUp(credentials).subscribe(() => {
       this.router.navigate(['/dashboard']);
     }, (err: HttpErrorResponse) => {
       this.messageService.showMessage(err.error.message, null, MessageTypes.ERROR);

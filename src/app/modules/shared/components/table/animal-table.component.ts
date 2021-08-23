@@ -4,19 +4,23 @@ import {MatDialog} from "@angular/material/dialog";
 import {ConfirmationDialogComponent} from "../modals/confirmation-dialog/confirmation-dialog.component";
 import {AnimalsService} from "../../services/animals.service";
 import {AnimalDialogComponent} from "../modals/animal-dialog/animal-dialog.component";
+import {OwnersService} from "../../../owners/owners.service";
+import {UnsubscribeOnDestroyAdapter} from "../../models/abstracts/unsubscribe-on-destroy-adapter.directive";
 
 @Component({
   selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  templateUrl: './animal-table.component.html',
+  styleUrls: ['./animal-table.component.scss']
 })
-export class TableComponent implements OnInit {
+export class AnimalTableComponent extends UnsubscribeOnDestroyAdapter implements OnInit {
 
   @Input() list: IAnimal[];
   @Input() displayedColumns: string[];
 
   constructor(private matDialog: MatDialog,
-              private animalsService: AnimalsService) {
+              private animalsService: AnimalsService,
+              private ownersService: OwnersService) {
+    super();
   }
 
   ngOnInit(): void {
@@ -28,7 +32,7 @@ export class TableComponent implements OnInit {
       data: {animal}
     });
 
-    ref.afterClosed().subscribe((updatedAnimal: IAnimal) => {
+    this.subscriptions.sink = ref.afterClosed().subscribe((updatedAnimal: IAnimal) => {
       if (updatedAnimal) {
         const foundAnimal = this.list.find(o => o.id === animal.id);
         if (foundAnimal) {
@@ -45,7 +49,7 @@ export class TableComponent implements OnInit {
       data: {}
     });
 
-    ref.afterClosed().subscribe((createdAnimal: IAnimal) => {
+    this.subscriptions.sink = ref.afterClosed().subscribe((createdAnimal: IAnimal) => {
       if (createdAnimal) {
         this.list.unshift(createdAnimal);
         this.list = [...this.list];
@@ -56,9 +60,9 @@ export class TableComponent implements OnInit {
   remove(animal: IAnimal) {
     const ref = this.matDialog.open(ConfirmationDialogComponent);
 
-    ref.afterClosed().subscribe((canContinue) => {
+    this.subscriptions.sink = ref.afterClosed().subscribe((canContinue) => {
       if (canContinue) {
-        this.animalsService.removeAnimal(animal.id).subscribe(animal => {
+        this.subscriptions.sink = this.animalsService.removeAnimal(animal.id).subscribe(animal => {
           this.list = this.list.filter(o => o.id !== animal.id);
         })
       }

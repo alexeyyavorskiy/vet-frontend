@@ -17,6 +17,10 @@ export class AnimalsService {
     return this.http.get<IAnimal[]>(`${MAIN_URL}/animals/getAll`);
   }
 
+  getAnimalById(id: number) {
+    return this.http.get<IAnimal>(`${MAIN_URL}/animals/getById/${id}`);
+  }
+
   createAnimal(pet: IAnimal) {
     return this.http.post<IAnimal>(`${MAIN_URL}/animals/create`, pet);
   }

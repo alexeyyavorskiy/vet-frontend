@@ -2,7 +2,7 @@ import {Directive, OnDestroy} from '@angular/core';
 import {SubSink} from 'subsink';
 
 @Directive()
-export class UnsubscribeOnDestroyAdapterDirective implements OnDestroy {
+export class UnsubscribeOnDestroyAdapter implements OnDestroy {
     subscriptions = new SubSink();
 
     ngOnDestroy(): void {
