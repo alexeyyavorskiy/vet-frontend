@@ -6,22 +6,22 @@
 
   <ng-container matColumnDef="species">
     <th mat-header-cell *matHeaderCellDef> Species</th>
-    <td mat-cell *matCellDef="let element"> {{element.species.label}} </td>
+    <td mat-cell *matCellDef="let element"> {{element?.species?.label}} </td>
   </ng-container>
 
   <ng-container matColumnDef="birthDay">
     <th mat-header-cell *matHeaderCellDef> BirthDay</th>
-    <td mat-cell *matCellDef="let element"> {{element.birthDay | date:'MMM d, y'}} </td>
+    <td mat-cell *matCellDef="let element"> {{element?.birthDay | date:'MMM d, y'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="owner">
     <th mat-header-cell *matHeaderCellDef> Owner</th>
-    <td mat-cell *matCellDef="let element"> {{element.owner.fullName}} </td>
+    <td mat-cell *matCellDef="let element"> {{element?.owner?.fullName}} </td>
   </ng-container>
 
   <ng-container matColumnDef="trackingId">
     <th mat-header-cell *matHeaderCellDef> TrackingId</th>
-    <td mat-cell *matCellDef="let element"> {{element.trackingId}} </td>
+    <td mat-cell *matCellDef="let element"> {{element?.trackingId}} </td>
   </ng-container>
 
 
@@ -55,7 +55,7 @@
 </table>
 <div class="container-fluid d-flex justify-content-end">
   <div class="example-button-container mt-3">
-    <button mat-mini-fab color="primary">
+    <button mat-mini-fab color="primary" (click)="create()">
       <mat-icon>add</mat-icon>
     </button>
   </div>

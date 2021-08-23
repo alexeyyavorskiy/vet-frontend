@@ -16,7 +16,7 @@
           <mat-form-field appearance="fill" class="w-100">
             <mat-label>Enter your country</mat-label>
             <input matInput formControlName="country">
-            <mat-error *ngIf="form.controls['country']?.errors?.required">
+            <mat-error *ngIf="addressForm.controls['country']?.errors?.required">
               Country is required
             </mat-error>
           </mat-form-field>
@@ -25,7 +25,7 @@
           <mat-form-field appearance="fill" class="w-100">
             <mat-label>Enter your city</mat-label>
             <input matInput formControlName="city">
-            <mat-error *ngIf="form.controls['city']?.errors?.required">
+            <mat-error *ngIf="addressForm.controls['city']?.errors?.required">
               City is required
             </mat-error>
           </mat-form-field>
@@ -34,7 +34,7 @@
           <mat-form-field appearance="fill" class="w-100">
             <mat-label>Enter your street</mat-label>
             <input matInput formControlName="street">
-            <mat-error *ngIf="form.controls['street']?.errors?.required">
+            <mat-error *ngIf="addressForm.controls['street']?.errors?.required">
               Street is required
             </mat-error>
           </mat-form-field>
@@ -43,7 +43,7 @@
           <mat-form-field appearance="fill" class="w-100">
             <mat-label>Enter your Zip code</mat-label>
             <input matInput formControlName="zipCode">
-            <mat-error *ngIf="form.controls['zipCode']?.errors?.required">
+            <mat-error *ngIf="addressForm.controls['zipCode']?.errors?.required">
               Zip code is required
             </mat-error>
           </mat-form-field>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs";
 import {IPet} from "../../../shared/models/interfaces/pet";
-import {DataService} from "../../../shared/services/data.service";
+import {AnimalsService} from "../../../shared/services/animals.service";
 import {IWildAnimal} from "../../../shared/models/interfaces/wild-animal";
 
 @Component({
@@ -13,7 +13,7 @@ export class WildsComponent implements OnInit {
   public wilds$: Observable<IWildAnimal[]>;
   public displayedColumns: string[];
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: AnimalsService) {
   }
 
   ngOnInit(): void {
