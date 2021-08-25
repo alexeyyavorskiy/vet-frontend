@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {IPet} from "../../../models/interfaces/pet";
 import {AnimalsService} from "../../../services/animals.service";
@@ -20,7 +20,7 @@ export class AnimalDialogComponent extends UnsubscribeOnDestroyAdapter implement
 
   constructor(private fb: FormBuilder,
               private dialogRef: MatDialogRef<AnimalDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: {animal: IPet},
+              @Inject(MAT_DIALOG_DATA) public data: {animal: any, isPet: boolean},
               private animalsService: AnimalsService
   ) {
     super()
@@ -43,9 +43,13 @@ export class AnimalDialogComponent extends UnsubscribeOnDestroyAdapter implement
     this.form = this.fb.group({
       birthDay: [this.data?.animal?.birthDay, Validators.required],
       vaccinated: [this.data?.animal?.vaccinated],
-      owner: this.ownerForm,
       species: this.speciesForm
     });
+    if (this.data.isPet) {
+      this.form.addControl('owner', this.ownerForm);
+    } else {
+      this.form.addControl('trackingId', new FormControl(this.data?.animal?.trackingId, Validators.required));
+    }
 
   }
 

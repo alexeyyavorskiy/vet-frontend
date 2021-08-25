@@ -16,6 +16,7 @@ export class AnimalTableComponent extends UnsubscribeOnDestroyAdapter implements
 
   @Input() list: IAnimal[];
   @Input() displayedColumns: string[];
+  @Input() isPet: boolean;
 
   constructor(private matDialog: MatDialog,
               private animalsService: AnimalsService,
@@ -30,28 +31,34 @@ export class AnimalTableComponent extends UnsubscribeOnDestroyAdapter implements
     if (animal.ownerId) {
       this.subscriptions.sink = this.ownersService.getById(animal.ownerId).subscribe(owner => {
         animal.owner = owner;
-        const ref = this.matDialog.open(AnimalDialogComponent, {
-          width: '600px',
-          data: {animal}
-        });
-
-        this.subscriptions.sink = ref.afterClosed().subscribe((updatedAnimal: IAnimal) => {
-          if (updatedAnimal) {
-            const foundAnimal = this.list.find(o => o.id === animal.id);
-            if (foundAnimal) {
-              this.list.splice(this.list.indexOf(foundAnimal), 1, updatedAnimal);
-              this.list = [...this.list];
-            }
-          }
-        });
+        this.openEditModal(animal, this.isPet);
       })
+    } else {
+      this.openEditModal(animal, this.isPet);
     }
+  }
+
+  openEditModal(animal, isPet: boolean) {
+    const ref = this.matDialog.open(AnimalDialogComponent, {
+      width: '600px',
+      data: {animal, isPet}
+    });
+
+    this.subscriptions.sink = ref.afterClosed().subscribe((updatedAnimal: IAnimal) => {
+      if (updatedAnimal) {
+        const foundAnimal = this.list.find(o => o.id === animal.id);
+        if (foundAnimal) {
+          this.list.splice(this.list.indexOf(foundAnimal), 1, updatedAnimal);
+          this.list = [...this.list];
+        }
+      }
+    });
   }
 
   create() {
     const ref = this.matDialog.open(AnimalDialogComponent, {
       width: '600px',
-      data: {}
+      data: {isPet: this.isPet}
     });
 
     this.subscriptions.sink = ref.afterClosed().subscribe((createdAnimal: IAnimal) => {

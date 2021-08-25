@@ -13,11 +13,11 @@ export class WildsComponent implements OnInit {
   public wilds$: Observable<IWildAnimal[]>;
   public displayedColumns: string[];
 
-  constructor(private dataService: AnimalsService) {
+  constructor(private animalsService: AnimalsService) {
   }
 
   ngOnInit(): void {
-    this.wilds$ = this.dataService.getWilds();
+    this.wilds$ = this.animalsService.getWilds();
     this.displayedColumns = ['id', 'species', 'birthDay', 'trackingId', 'vaccinated', 'actions'];
   }
 

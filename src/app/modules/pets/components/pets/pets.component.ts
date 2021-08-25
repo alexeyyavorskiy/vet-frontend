@@ -16,7 +16,7 @@ export class PetsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pets$ = this.dataService.getAnimals() as Observable<IPet[]>;
+    this.pets$ = this.dataService.getPets() as Observable<IPet[]>;
     this.displayedColumns = ['id', 'species', 'birthDay', 'owner', 'vaccinated', 'actions'];
   }
 
